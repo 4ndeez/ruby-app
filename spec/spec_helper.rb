@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-require 'ruby_app'
+require_relative '../config/environment'
 require 'simplecov'
 
 SimpleCov.start
@@ -10,6 +10,9 @@ RSpec.configure do |config|
 
   # Disable RSpec exposing methods globally on `Module` and `main`
   config.disable_monkey_patching!
+
+  # Disable output to terminal
+  config.before { allow($stdout).to receive(:puts) }
 
   config.expect_with :rspec do |c|
     c.syntax = :expect

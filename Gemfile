@@ -10,7 +10,6 @@ group :development do
 end
 
 group :test do
-  gem 'faker', '~> 1.6'
-  gem "rspec", "~> 3.0"
+  gem 'rspec'
   gem 'simplecov', '~> 0.12.0'
 end
