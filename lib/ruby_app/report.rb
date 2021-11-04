@@ -1,26 +1,16 @@
 # frozen_string_literal: true
-module Report
-  UNDERLINE = ('_' * 40)
+class Report
+  attr_reader :links
 
-  def generate_report(links)
-    most_page_views(links)
-    most_unique_views(links)
+  def initialize(links)
+    @links = links
   end
 
-  private
-
-  def most_page_views(links)
-    puts UNDERLINE
-    puts "        MOST VIEWED PAGES BY DESC"
-    puts UNDERLINE
-    links.sort_by { |_k, v| v.size }.reverse.to_h.each_pair { |k, v| puts k.ljust(15) + "#{v.size} visits" }
-    puts UNDERLINE
+  def most_page_views
+    links.sort_by { |_k, v| v.size }.reverse.to_h
   end
 
-  def most_unique_views(links)
-    puts "     MOST UNIQUE PAGE VIEWS BY DESC"
-    puts UNDERLINE
-    links.sort_by { |_k, v| v.uniq!.size }.reverse.to_h.each_pair { |k, v| puts k.ljust(15) + "#{v.size} unique views" }
-    puts UNDERLINE
+  def most_unique_views
+    links.sort_by { |_k, v| v.uniq!.size }.reverse.to_h
   end
 end

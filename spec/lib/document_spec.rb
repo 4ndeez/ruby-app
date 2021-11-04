@@ -6,12 +6,16 @@ RSpec.describe Document do
   subject { described_class.new(path) }
 
   describe '#initialize' do
-    it 'assigns documents' do
+    it 'assigns doc path' do
       expect(subject.path).to eq(path)
     end
 
     it 'assigns links to an empty hash' do
       expect(subject.links).to eq(Hash.new)
+    end
+
+    it 'assigns errors to an empty array' do
+      expect(subject.errors).to eq(Array.new)
     end
   end
 
@@ -19,7 +23,7 @@ RSpec.describe Document do
     context 'with valid document' do
       it 'parses file and assign links' do
         subject.parse
-        expect(subject.links['/contact']).not_to be_empty
+        expect(subject.links).not_to be_empty
       end
     end
 
