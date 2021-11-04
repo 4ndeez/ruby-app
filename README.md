@@ -31,9 +31,7 @@ ___
 ### Output example
 ___
 ```
-________________________________________
         MOST VIEWED PAGES BY DESC
-________________________________________
 /about/2       90 visits
 /contact       89 visits
 /index         82 visits
@@ -42,12 +40,10 @@ ________________________________________
 /home          78 visits
 ________________________________________
      MOST UNIQUE PAGE VIEWS BY DESC
-________________________________________
 /index         23 unique views
 /home          23 unique views
 /contact       23 unique views
 /help_page/1   23 unique views
 /about/2       22 unique views
 /about         21 unique views
-________________________________________
 ```
