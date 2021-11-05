@@ -2,7 +2,7 @@
 require_relative '../spec_helper'
 
 RSpec.describe Document do
-  let(:path) { '../fixtures/webserver.log' }
+  let(:path) { 'spec/fixtures/webserver.log' }
   subject { described_class.new(path) }
 
   describe '#initialize' do
@@ -39,7 +39,7 @@ RSpec.describe Document do
   describe '#valid?' do
     context 'with valid document' do
       it 'returns true' do
-        expect(described_class.new('../fixtures/webserver.log').valid?).to eq(true)
+        expect(described_class.new('spec/fixtures/webserver.log').valid?).to eq(true)
       end
     end
 

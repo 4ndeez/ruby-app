@@ -2,7 +2,7 @@
 require_relative '../spec_helper'
 
 RSpec.describe Report do
-  let(:path) { '../fixtures/webserver.log' }
+  let(:path) { 'spec/fixtures/webserver.log' }
   let(:document) { Document.new(path) }
   before { document.parse }
   subject { described_class.new(document.links) }
