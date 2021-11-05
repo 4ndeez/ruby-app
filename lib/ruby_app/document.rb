@@ -1,4 +1,5 @@
 # frozen_string_literal: true
+
 class Document
   attr_reader :path, :links, :errors
 
@@ -24,7 +25,10 @@ class Document
   private
 
   def exist?
-    File.exist?(path) ? true : (errors.push('File does not exist'); false)
+    return true if File.exist?(path)
+
+    errors.push('File does not exist')
+    false
   end
 
   def empty?
@@ -32,6 +36,9 @@ class Document
   end
 
   def fine_format?
-    File.extname(path) == '.log' ? true : (errors.push('File has incorrect format'); false)
+    return true if File.extname(path) == '.log'
+
+    errors.push('File has incorrect format')
+    false
   end
 end

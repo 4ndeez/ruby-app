@@ -1,4 +1,5 @@
 # frozen_string_literal: true
+
 require_relative '../spec_helper'
 
 RSpec.describe Document do
@@ -11,11 +12,11 @@ RSpec.describe Document do
     end
 
     it 'assigns links to an empty hash' do
-      expect(subject.links).to eq(Hash.new)
+      expect(subject.links).to eq({})
     end
 
     it 'assigns errors to an empty array' do
-      expect(subject.errors).to eq(Array.new)
+      expect(subject.errors).to eq([])
     end
   end
 

@@ -1,4 +1,5 @@
 # frozen_string_literal: true
+
 require_relative '../spec_helper'
 
 RSpec.describe Report do
@@ -25,7 +26,7 @@ RSpec.describe Report do
     end
 
     it 'returns correct and ordered hash' do
-      expect(subject.most_page_views.transform_values { |v| v.size }).to eq(result)
+      expect(subject.most_page_views.transform_values(&:size)).to eq(result)
     end
   end
 
@@ -40,8 +41,7 @@ RSpec.describe Report do
     end
 
     it 'returns correct and ordered hash' do
-      expect(subject.most_unique_views.transform_values { |v| v.size }).to eq(result)
+      expect(subject.most_unique_views.transform_values(&:size)).to eq(result)
     end
   end
 end
-
