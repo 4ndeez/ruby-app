@@ -3,17 +3,12 @@
 require_relative '../spec_helper'
 
 RSpec.describe Report do
+  subject(:report) { described_class.new(document.links) }
+
   let(:path) { 'spec/fixtures/webserver.log' }
   let(:document) { Document.new(path) }
-  before { document.parse }
-  subject { described_class.new(document.links) }
 
-  describe '#initialize' do
-    it 'assigns links to not empty hash' do
-      document.parse
-      expect(subject.links).not_to be_empty
-    end
-  end
+  before { document.parse }
 
   describe '#most_page_views' do
     let(:result) do
@@ -26,7 +21,7 @@ RSpec.describe Report do
     end
 
     it 'returns correct and ordered hash' do
-      expect(subject.most_page_views.transform_values(&:size)).to eq(result)
+      expect(report.most_page_views.transform_values(&:size)).to eq(result)
     end
   end
 
@@ -41,7 +36,7 @@ RSpec.describe Report do
     end
 
     it 'returns correct and ordered hash' do
-      expect(subject.most_unique_views.transform_values(&:size)).to eq(result)
+      expect(report.most_unique_views.transform_values(&:size)).to eq(result)
     end
   end
 end

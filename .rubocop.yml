@@ -1,0 +1,7 @@
+require: 'rubocop-rspec'
+Metrics/BlockLength:
+  ExcludedMethods:
+    - describe
+
+Style/Documentation:
+  Enabled: false

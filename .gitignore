@@ -3,5 +3,4 @@
 # rspec failure tracking
 .rspec_status
 .rspec
-**/.rubocop.yml
 **/.DS_Store

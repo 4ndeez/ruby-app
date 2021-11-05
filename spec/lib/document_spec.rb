@@ -3,28 +3,15 @@
 require_relative '../spec_helper'
 
 RSpec.describe Document do
-  let(:path) { 'spec/fixtures/webserver.log' }
-  subject { described_class.new(path) }
-
-  describe '#initialize' do
-    it 'assigns doc path' do
-      expect(subject.path).to eq(path)
-    end
-
-    it 'assigns links to an empty hash' do
-      expect(subject.links).to eq({})
-    end
-
-    it 'assigns errors to an empty array' do
-      expect(subject.errors).to eq([])
-    end
-  end
+  subject(:document) { described_class.new(path) }
 
   describe '#parse' do
     context 'with valid document' do
+      let(:path) { 'spec/fixtures/webserver.log' }
+
       it 'parses file and assign links' do
-        subject.parse
-        expect(subject.links).not_to be_empty
+        document.parse
+        expect(document.links).not_to be_empty
       end
     end
 
