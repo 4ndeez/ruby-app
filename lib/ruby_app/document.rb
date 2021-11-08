@@ -1,25 +1,26 @@
 # frozen_string_literal: true
 
 class Document
-  attr_reader :path, :links, :errors
+  attr_reader :path, :errors
 
   def initialize(path)
     @path = path
-    @links = Hash.new { |key, value| key[value] = [] }
     @errors ||= []
-    valid?
+    @links = Hash.new { |key, value| key[value] = [] }
   end
 
-  def parse
+  def links
+    raise IOError, errors unless valid?
+
     IO.foreach(path) do |line|
       path, ip = line.split
-      links[path] << ip
+      @links[path] << ip
     end
+    @links
   end
 
   def valid?
     exist? && fine_format? && !empty?
-    errors.any? ? (raise IOError, errors) : true
   end
 
   private
@@ -32,7 +33,10 @@ class Document
   end
 
   def empty?
-    errors.push('File is empty') if File.zero?(path)
+    return false unless File.zero?(path)
+
+    errors.push('File is empty')
+    true
   end
 
   def fine_format?

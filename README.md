@@ -38,7 +38,6 @@ ___
 /about         81 visits
 /help_page/1   80 visits
 /home          78 visits
-________________________________________
      MOST UNIQUE PAGE VIEWS BY DESC
 /index         23 unique views
 /home          23 unique views

@@ -3,40 +3,60 @@
 require_relative '../spec_helper'
 
 RSpec.describe Report do
-  subject(:report) { described_class.new(document.links) }
+  subject(:report) { described_class.new(hash) }
 
   let(:path) { 'spec/fixtures/webserver.log' }
-  let(:document) { Document.new(path) }
+  let(:hash) do
+    { '/help_page/1' => ['126.318.035.038', '126.318.035.038', '126.318.035.038'],
+      '/index' => ['444.701.448.104', '444.701.448.104'],
+      '/about' => ['061.945.150.735'] }
+  end
 
-  before { document.parse }
+  before { allow($stdout).to receive(:puts) }
 
   describe '#most_page_views' do
-    let(:result) do
-      { '/about' => 19,
-        '/home' => 19,
-        '/help_page/1' => 18,
-        '/about/2' => 17,
-        '/contact' => 16,
-        '/index' => 11 }
+    subject(:most_page_views) { report.most_page_views }
+
+    let(:expected_result) do
+      { '/help_page/1' => ['126.318.035.038', '126.318.035.038', '126.318.035.038'],
+        '/index' => ['444.701.448.104', '444.701.448.104'],
+        '/about' => ['061.945.150.735'] }
     end
 
     it 'returns correct and ordered hash' do
-      expect(report.most_page_views.transform_values(&:size)).to eq(result)
+      expect(most_page_views).to eq(expected_result)
+    end
+
+    it 'prints output to terminal' do
+      expect { most_page_views }.to output(<<~MESSAGE).to_stdout
+            MOST VIEWED PAGES
+        /help_page/1   3 visits
+        /index         2 visits
+        /about         1 visits
+      MESSAGE
     end
   end
 
   describe '#most_unique_views' do
-    let(:result) do
-      { '/about' => 13,
-        '/home' => 14,
-        '/help_page/1' => 12,
-        '/about/2' => 12,
-        '/contact' => 10,
-        '/index' => 10 }
+    subject(:most_unique_views) { report.most_unique_views }
+
+    let(:expected_result) do
+      { '/help_page/1' => ['126.318.035.038'],
+        '/index' => ['444.701.448.104'],
+        '/about' => ['061.945.150.735'] }
     end
 
     it 'returns correct and ordered hash' do
-      expect(report.most_unique_views.transform_values(&:size)).to eq(result)
+      expect(most_unique_views).to eq(expected_result)
+    end
+
+    it 'prints output to terminal' do
+      expect { most_unique_views }.to output(<<~MESSAGE).to_stdout
+            MOST UNIQUE PAGE VIEWS
+        /about         1 unique views
+        /index         1 unique views
+        /help_page/1   1 unique views
+      MESSAGE
     end
   end
 end
